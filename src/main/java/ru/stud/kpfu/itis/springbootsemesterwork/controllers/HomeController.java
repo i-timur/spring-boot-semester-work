@@ -26,7 +26,9 @@ public class HomeController {
   public String getHomePage(Authentication authentication, Model model) {
     model.addAttribute("articlesList", articlesService.getAllArticles());
     model.addAttribute("categoriesList", categoriesService.getAllCategories());
-    model.addAttribute("username", authentication.getName());
+    if (authentication != null) {
+      model.addAttribute("username", authentication.getName());
+    }
     return "home_page";
   }
 
@@ -34,7 +36,9 @@ public class HomeController {
   @GetMapping("/article")
   public String getArticlePage(Authentication authentication, @RequestParam Long id, Model model) {
     model.addAttribute("article", articlesService.getById(id));
-    model.addAttribute("username", authentication.getName());
+    if (authentication != null) {
+      model.addAttribute("username", authentication.getName());
+    }
     return "article_page";
   }
 }

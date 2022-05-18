@@ -52,5 +52,6 @@
   </main>
 </div>
 <script src="js/search.js"></script>
+<script src="js/createAlert.js"></script>
 </body>
 </html>

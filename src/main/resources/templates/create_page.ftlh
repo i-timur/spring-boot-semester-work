@@ -18,7 +18,7 @@
       <input name="title" type="text" class="create__input">
       <h2 class="title">Содержание статьи</h2>
       <textarea form="form" name="text" id="" class="create__textarea" placeholder="Впишите сюда ваш текст"></textarea>
-      <select form="form" name="select" id="select" class="form__select" multiple>
+      <select form="form" name="categoryIds" id="select" class="form__select" multiple>
           <#if categoriesList??>
               <#if categoriesList?has_content>
                   <#list categoriesList as category>

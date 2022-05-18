@@ -36,6 +36,13 @@ public class Article {
     this.text = text;
   }
 
+  public Article(User author, String title, String text, List<Category> categories) {
+    this.author = author;
+    this.title = title;
+    this.text = text;
+    this.categories = categories;
+  }
+
   public Article(Long id, User author, String title, String text, List<Category> categories, LocalDate publishDate, List<Comment> comments) {
     this.id = id;
     this.author = author;

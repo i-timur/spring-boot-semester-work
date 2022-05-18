@@ -6,6 +6,7 @@ import ru.stud.kpfu.itis.springbootsemesterwork.dto.ArticleDto;
 import ru.stud.kpfu.itis.springbootsemesterwork.dto.ArticleForm;
 import ru.stud.kpfu.itis.springbootsemesterwork.dto.CategoryDto;
 import ru.stud.kpfu.itis.springbootsemesterwork.models.Article;
+import ru.stud.kpfu.itis.springbootsemesterwork.models.Category;
 import ru.stud.kpfu.itis.springbootsemesterwork.repositories.ArticlesRepository;
 import ru.stud.kpfu.itis.springbootsemesterwork.repositories.CategoriesRepository;
 import ru.stud.kpfu.itis.springbootsemesterwork.repositories.UsersRepository;
@@ -38,10 +39,19 @@ public class ArticlesServiceImpl implements ArticlesService {
 
   @Override
   public void save(ArticleForm form, String author) {
-    articlesRepository.save(new Article(
+    List<Category> categories = form.getCategoryIds().stream().map((c) -> categoriesRepository.getById(c)).collect(Collectors.toList());
+    Article newArticle = new Article(
       usersRepository.findByName(author).get(),
       form.getTitle(),
-      form.getText()));
+      form.getText(),
+      categories
+    );
+    articlesRepository.save(newArticle);
+    categories.stream().forEach((c) -> {
+      c.getArticles().add(newArticle);
+      categoriesRepository.save(c);
+
+    });
   }
 
   @Override
