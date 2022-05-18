@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles/header.css" type="text/css" />
   <link rel="stylesheet" href="styles/home.css" type="text/css" />
   <title>Hikipedia</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -26,7 +27,7 @@
         <div class="main-top__find">
           <form>
             <div class="form__container">
-              <select form="find" name="select" id="select" class="form__select" multiple>
+              <select form="find" name="select" id="select" class="form__select">
                 <option form="find" name="option" value="all" class="form__option">По всем категориям</option>
                 <#if categoriesList??>
                   <#if categoriesList?has_content>
@@ -36,8 +37,7 @@
                   </#if>
                 </#if>
               </select>
-              <input name="search" form="find" type="text" class="form__input" placeholder="Поиск">
-              <button form="find" class="form__button" id="form__button">Поиск</button>
+              <input name="search" form="find" id="input" type="text" class="form__input" placeholder="Поиск">
             </div>
           </form>
         </div>
@@ -46,26 +46,11 @@
     <section class="page__main-block main-block">
       <div class="main-block__container container">
         <div class="main-block__content">
-            <#if articlesList??>
-                <#if articlesList?has_content>
-                    <#list articlesList as article>
-                      <div class="main-block__item">
-                        <a href="/contribution/${article.id}" class="main-block__link">
-                          <span>${article.title}</span>
-                          <span class="main-block__author">Автор: ${article.author.name}</span>
-                        </a>
-                      </div>
-                    </#list>
-                    <#else>
-                      <p class="main-block__paragraph">
-                        Пока не создано ни одной статьи. Будьте первым!
-                      </p>
-                </#if>
-            </#if>
         </div>
       </div>
     </section>
   </main>
 </div>
+<script src="js/search.js"></script>
 </body>
 </html>
